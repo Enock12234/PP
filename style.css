@@ -316,16 +316,4 @@ window.addEventListener('scroll', function() {
 /*         Section Reveal Animations     */
 /* ------------------------------------- */
 
-/* Default hidden state */
-section {
-    opacity: 0;
-    transform: translateY(50px);
-    transition: all 1s ease-out;
-}
-
-/* When visible */
-section.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
 
