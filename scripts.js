@@ -43,4 +43,12 @@ if (contactForm) {
     contactForm.reset();
   });
 }
+<script>
+  window.addEventListener('load', () => {
+    const loader = document.getElementById('loader');
+    setTimeout(() => {
+      loader.classList.add('hidden');
+    }, 1500);
+  });
+</script>
 
