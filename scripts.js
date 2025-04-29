@@ -74,3 +74,13 @@ socialLinks.forEach(link => {
     link.style.transform = 'scale(1)';
   });
 });
+
+<script>
+  window.addEventListener('load', () => {
+    const loader = document.getElementById('loader');
+    setTimeout(() => {
+      loader.classList.add('hidden');
+    }, 1500); // delay ensures visibility for user experience
+  });
+</script>
+
