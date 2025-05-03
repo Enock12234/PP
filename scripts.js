@@ -1,9 +1,4 @@
-// ----------------------------------------------
-// Takunda Maluwa - Portfolio JS
-// Smooth Scroll | Section Animation | Form Alert
-// ----------------------------------------------
-
-// Smooth scroll for nav links
+// Smooth scroll for internal anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     e.preventDefault();
@@ -14,41 +9,54 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// Section reveal on scroll using IntersectionObserver
-const observerOptions = {
-  threshold: 0.2
-};
+// Form submission handler
+document.getElementById('contact-form').addEventListener('submit', function (e) {
+  e.preventDefault();
 
-const sectionObserver = new IntersectionObserver((entries, observer) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target); // only animate once
-    }
-  });
-}, observerOptions);
+  const name = this.querySelector('input[type="text"]').value.trim();
+  const email = this.querySelector('input[type="email"]').value.trim();
+  const message = this.querySelector('textarea').value.trim();
 
-// Apply observer to all main sections
-document.querySelectorAll('section').forEach(section => {
-  sectionObserver.observe(section);
+  if (!name || !email || !message) {
+    alert('⚠️ Please fill out all fields.');
+    return;
+  }
+
+  if (!validateEmail(email)) {
+    alert('📛 Please enter a valid email address.');
+    return;
+  }
+
+  alert('✅ Message sent successfully (mock)');
+  this.reset();
 });
 
-// Contact form submit - fake alert
-const contactForm = document.getElementById('contact-form');
-
-if (contactForm) {
-  contactForm.addEventListener('submit', e => {
-    e.preventDefault();
-    alert('✅ Message sent! Takunda will get back to you shortly.');
-    contactForm.reset();
-  });
+// Simple email validation
+function validateEmail(email) {
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(email);
 }
-<script>
-  window.addEventListener('load', () => {
-    const loader = document.getElementById('loader');
-    setTimeout(() => {
-      loader.classList.add('hidden');
-    }, 1500);
+
+// Animate on scroll using intersection observer
+const animateOnScroll = () => {
+  const animatedElems = document.querySelectorAll('.animate__animated');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate__fadeInUp');
+        observer.unobserve(entry.target); // Animate once
+      }
+    });
+  }, { threshold: 0.2 });
+
+  animatedElems.forEach(el => {
+    observer.observe(el);
   });
-</script>
+};
+
+// Init animations on DOM load
+document.addEventListener('DOMContentLoaded', () => {
+  animateOnScroll();
+});
 
